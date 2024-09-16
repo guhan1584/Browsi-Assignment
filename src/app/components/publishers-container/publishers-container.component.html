@@ -1,0 +1,24 @@
+<div class="publishers-container">
+    <form (ngSubmit)="addPublisher()">
+      <label for="publisherName">Publisher Name:</label>
+      <input
+        id="publisherName"
+        type="text"
+        [(ngModel)]="publisherName"
+        name="publisherName"
+        placeholder="Enter publisher name"
+        required
+      />
+      <button type="submit">Add Publisher</button>
+    </form>
+    <app-publisher-card *ngFor="let publisher of publishers" [publisher]="publisher">
+      <div *ngIf="publisherDomains[publisher.publisher] && publisherDomains[publisher.publisher].length">
+        <h4>Domains for {{ publisher.publisher }}:</h4>
+        <app-domain-card *ngFor="let domain of publisherDomains[publisher.publisher]" [domain]="domain"></app-domain-card>
+      </div>
+      <div *ngIf="!publisherDomains[publisher.publisher]?.length">
+        <p>No domains available for this publisher.</p>
+      </div>
+      <div *ngIf="true">This should always be visible</div>
+    </app-publisher-card>
+</div>
